@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/Kirito-Seika/Backend-LaptopShop-NodeJS/issues"
   },
-  "homepage": "https://github.com/Kirito-Seika/Backend-LaptopShop-NodeJS#readme"
+  "homepage": "https://github.com/Kirito-Seika/Backend-LaptopShop-NodeJS#readme",
+  "dependencies": {
+    "express": "5.0.1"
+  }
 }
