@@ -10,11 +10,15 @@ const hostname = process.env.HOST_NAME;
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 
-//config router
-webRouter(app);
+//config express: req.body
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 //config static file: image, css, javascript
 app.use(express.static('public'));
+
+//config router
+webRouter(app);
 
 app.listen(port, () => {
     console.log(`Server running at http://${hostname}:${port}`);
