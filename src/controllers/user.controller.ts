@@ -4,8 +4,13 @@ const getHomePage = (req: Request, res: Response) => {
     return res.render('home');
 }
 
-const createUser = (req: Request, res: Response) => {
+const createUserPage = (req: Request, res: Response) => {
     return res.render('create');
 }
 
-export { getHomePage, createUser };
+const createUser = (req: Request, res: Response) => {
+    console.log('Check data: ', req.body);
+    return res.redirect('/');
+}
+
+export { getHomePage, createUserPage, createUser };
