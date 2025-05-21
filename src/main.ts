@@ -1,6 +1,6 @@
 import express from 'express';
 import 'dotenv/config';
-import webRouter from './routes/web';
+import webRouter from 'routes/web';
 
 const app = express();
 const port = process.env.PORT || 8000;
