@@ -1,10 +1,11 @@
+import { prisma } from "config/client";
 import Connection from "config/database";
 
 const fetchAllUser = async () => {
     const connection = await Connection();
     try {
         const [results, fields] = await connection.query(
-            'SELECT * FROM `users`'
+            'SELECT * FROM `user`'
         );
         return results;
     } catch (err) {
@@ -14,25 +15,20 @@ const fetchAllUser = async () => {
 }
 
 const handleCreateUser = async (name: string, email: string, address: string) => {
-    //insert into database
-    const connection = await Connection();
-    try {
-        const sql = 'INSERT INTO `users`(`name`, `email`, `address`) VALUES (?, ?, ?)';
-        const values = [name, email, address];
-
-        const [results, fields] = await connection.execute(sql, values);
-        return results;
-    } catch (err) {
-        console.log(err);
-        return [];
-    }
+    const user = await prisma.user.create({
+        data: {
+            name: name,
+            email: email,
+            address: address
+        }
+    })
+    return user;
 }
 
 const handleDeleteUser = async (id: string) => {
-    //insert into database
     const connection = await Connection();
     try {
-        const sql = 'DELETE FROM `users` WHERE `id` = ? LIMIT 1';
+        const sql = 'DELETE FROM `user` WHERE `id` = ? LIMIT 1';
         const values = [id];
 
         const [results, fields] = await connection.execute(sql, values);
@@ -47,7 +43,7 @@ const handleDeleteUser = async (id: string) => {
 const handleViewUser = async (id: string) => {
     const connection = await Connection();
     try {
-        const sql = 'SELECT * FROM `users` WHERE `id` = ?';
+        const sql = 'SELECT * FROM `user` WHERE `id` = ?';
         const values = [id];
 
         const [results, fields] = await connection.execute(sql, values);
@@ -62,7 +58,7 @@ const handleViewUser = async (id: string) => {
 const handleUpdateUser = async (id: string, name: string, email: string, address: string) => {
     const connection = await Connection();
     try {
-        const sql = 'UPDATE `users` SET `name` = ?, `email` = ?, `address` = ?  WHERE `id` = ?';
+        const sql = 'UPDATE `user` SET `name` = ?, `email` = ?, `address` = ?  WHERE `id` = ?';
         const values = [name, email, address, id];
 
         const [results, fields] = await connection.execute(sql, values);
