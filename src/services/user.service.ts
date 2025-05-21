@@ -26,11 +26,22 @@ const handleCreateUser = async (name: string, email: string, address: string) =>
         console.log(err);
         return [];
     }
-
-    //return result
-    console.log("Check name: ", name);
-    console.log("Check email: ", email);
-    console.log("Check address: ", address);
 }
 
-export { fetchAllUser, handleCreateUser }
+const handleDeleteUser = async (id: string) => {
+    //insert into database
+    const connection = await Connection();
+    try {
+        const sql = 'DELETE FROM `users` WHERE `id` = ? LIMIT 1';
+        const values = [id];
+
+        const [results, fields] = await connection.execute(sql, values);
+
+        return results;
+    } catch (err) {
+        console.log(err);
+        return [];
+    }
+}
+
+export { fetchAllUser, handleCreateUser, handleDeleteUser }
