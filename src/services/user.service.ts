@@ -1,3 +1,18 @@
+import Connection from "../config/database";
+
+const fetchAllUser = async () => {
+    const connection = await Connection();
+    try {
+        const [results, fields] = await connection.query(
+            'SELECT * FROM `users`'
+        );
+        return results;
+    } catch (err) {
+        console.log(err);
+        return [];
+    }
+}
+
 const handleCreateUser = (name: string, email: string, address: string) => {
     //insert into database
 
@@ -7,4 +22,4 @@ const handleCreateUser = (name: string, email: string, address: string) => {
     console.log("Check address: ", address);
 }
 
-export { handleCreateUser }
+export { fetchAllUser, handleCreateUser }

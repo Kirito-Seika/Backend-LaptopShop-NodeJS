@@ -1,24 +1,16 @@
 import mysql from 'mysql2/promise';
+import 'dotenv/config';
 
 const Connection = async () => {
     const connection = await mysql.createConnection({
         port: 3306,
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'laptopshop',
+        host: process.env.HOST_NAME,
+        user: process.env.USER_NAME,
+        password: process.env.USER_PASS,
+        database: process.env.DATABASE,
     });
 
-    try {
-        const [results, fields] = await connection.query(
-            'SELECT * FROM `users`'
-        );
-
-        console.log(results); // results contains rows returned by server
-        console.log(fields); // fields contains extra meta data about results, if available
-    } catch (err) {
-        console.log(err);
-    }
+    return connection;
 }
 
 export default Connection;
