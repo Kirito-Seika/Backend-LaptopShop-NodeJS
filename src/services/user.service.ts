@@ -2,16 +2,8 @@ import { prisma } from "config/client";
 import Connection from "config/database";
 
 const fetchAllUser = async () => {
-    const connection = await Connection();
-    try {
-        const [results, fields] = await connection.query(
-            'SELECT * FROM `user`'
-        );
-        return results;
-    } catch (err) {
-        console.log(err);
-        return [];
-    }
+    const users = await prisma.user.findMany();
+    return users;
 }
 
 const handleCreateUser = async (name: string, email: string, address: string) => {
