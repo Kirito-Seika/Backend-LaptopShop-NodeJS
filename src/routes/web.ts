@@ -1,5 +1,5 @@
 import express, { Express } from 'express';
-import { deleteUser, createUser, createUserPage, getHomePage, viewUserPage } from 'controllers/user.controller';
+import { deleteUser, createUser, createUserPage, getHomePage, viewUserPage, updateUser } from 'controllers/user.controller';
 
 const router = express.Router();
 
@@ -13,6 +13,8 @@ const webRouter = (app: Express) => {
     router.post('/delete-user/:id', deleteUser);
 
     router.get('/view-user/:id', viewUserPage);
+
+    router.post('/update-user', updateUser);
 
     app.use('/', router);
 }

@@ -13,6 +13,7 @@
     <div style="width: 600px; margin: auto;">
         <h3 style="padding: 30px 0 10px;">View Detail User:</h3>
         <form action="/update-user" method="post">
+            <input style="display: none;" name="id" value="<%=user.id%>" class="form-control">
             <div class="mb-3">
                 <label class="form-label">Name:</label>
                 <input value="<%=user.name%>" name="name" type="text" class="form-control"
