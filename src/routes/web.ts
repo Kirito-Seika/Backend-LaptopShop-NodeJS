@@ -1,6 +1,6 @@
 import express, { Express } from 'express';
 import { deleteUser, createUser, createUserPage, getHomePage, viewUserPage, updateUser } from 'controllers/user.controller';
-import { dashboardPage } from 'controllers/admin/dashboard.controller';
+import { adminUserPage, dashboardPage } from 'controllers/admin/admin.controller';
 
 const router = express.Router();
 
@@ -19,6 +19,7 @@ const webRouter = (app: Express) => {
 
     //admin router
     router.get('/admin', dashboardPage);
+    router.get('/admin/user', adminUserPage);
 
     app.use('/', router);
 }
