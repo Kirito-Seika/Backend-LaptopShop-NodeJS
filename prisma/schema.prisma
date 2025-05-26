@@ -43,7 +43,7 @@ model Order {
 
 model Product {
   id         Int     @id @default(autoincrement())
-  name       String? @db.VarChar(255) //tên người dùng
+  name       String? @db.VarChar(255)
   price      Int
   image      String? @db.VarChar(255)
   detailDesc String? @db.VarChar(255)

@@ -6,12 +6,14 @@ const fetchAllUser = async () => {
     return users;
 }
 
-const handleCreateUser = async (name: string, email: string, address: string) => {
+const handleCreateUser = async (username: string, email: string, address: string) => {
     const createUser = await prisma.user.create({
         data: {
-            name: name,
+            username: username,
             email: email,
-            address: address
+            password: "ahihi",
+            address: address,
+            accountType: ""
         }
     })
     return createUser;
@@ -26,13 +28,13 @@ const handleViewUser = async (id: string) => {
     return viewUser;
 }
 
-const handleUpdateUser = async (id: string, name: string, email: string, address: string) => {
+const handleUpdateUser = async (id: string, username: string, email: string, address: string) => {
     const updateUser = await prisma.user.update({
         where: {
             id: +id,
         },
         data: {
-            name: name,
+            username: username,
             email: email,
             address: address
         },

@@ -13,8 +13,8 @@ const createUserPage = (req: Request, res: Response) => {
 }
 
 const createUser = async (req: Request, res: Response) => {
-    const { name, email, address } = req.body;
-    await handleCreateUser(name, email, address);
+    const { username, email, address } = req.body;
+    await handleCreateUser(username, email, address);
     return res.redirect('/');
 }
 
@@ -31,8 +31,8 @@ const viewUserPage = async (req: Request, res: Response) => {
 }
 
 const updateUser = async (req: Request, res: Response) => {
-    const { id, name, email, address } = req.body;
-    await handleUpdateUser(id, name, email, address)
+    const { id, username, email, address } = req.body;
+    await handleUpdateUser(id, username, email, address)
     return res.redirect('/');
 }
 

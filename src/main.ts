@@ -1,6 +1,7 @@
 import express from 'express';
 import 'dotenv/config';
 import webRouter from 'routes/web';
+import createDatabase from 'config/seeding';
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -19,6 +20,9 @@ app.use(express.static('public'));
 
 //config router
 webRouter(app);
+
+//seeding database
+createDatabase();
 
 app.listen(port, () => {
     console.log(`Server running at http://${hostname}:${port}`);
