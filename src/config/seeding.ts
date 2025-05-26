@@ -2,6 +2,7 @@ import { prisma } from "config/client";
 
 const createDatabase = async () => {
     const countUser = await prisma.user.count();
+    const countRole = await prisma.role.count();
     if (countUser === 0) {
         await prisma.user.createMany({
             data: [
@@ -32,6 +33,19 @@ const createDatabase = async () => {
                     accountType: 'SYSTEM',
                     avatar: ''
                 }
+            ]
+        });
+    } else if (countRole === 0) {
+        await prisma.role.createMany({
+            data: [
+                {
+                    name: 'ADMIN',
+                    description: 'Admin có tất cả quyền hạn'
+                },
+                {
+                    name: 'USER',
+                    description: 'User chỉ có quyền hạn thông thường'
+                },
             ]
         });
     } else {

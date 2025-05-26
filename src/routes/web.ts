@@ -7,8 +7,6 @@ const router = express.Router();
 const webRouter = (app: Express) => {
     router.get('/', getHomePage);
 
-
-
     router.post('/create-user', createUser);
 
     router.post('/delete-user/:id', deleteUser);
