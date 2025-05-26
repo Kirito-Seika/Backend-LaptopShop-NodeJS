@@ -1,13 +1,13 @@
 import express, { Express } from 'express';
 import { deleteUser, createUser, createUserPage, getHomePage, viewUserPage, updateUser } from 'controllers/user.controller';
-import { adminUserPage, dashboardPage } from 'controllers/admin/admin.controller';
+import { adminUserPage, adminProductPage, adminOrderPage, dashboardPage, adminCreateUserPage } from 'controllers/admin/admin.controller';
 
 const router = express.Router();
 
 const webRouter = (app: Express) => {
     router.get('/', getHomePage);
 
-    router.get('/create-user', createUserPage);
+
 
     router.post('/create-user', createUser);
 
@@ -19,7 +19,14 @@ const webRouter = (app: Express) => {
 
     //admin router
     router.get('/admin', dashboardPage);
+
+    //admin user
     router.get('/admin/user', adminUserPage);
+    router.get('/admin/create-user', adminCreateUserPage);
+
+    router.get('/admin/product', adminProductPage);
+
+    router.get('/admin/order', adminOrderPage);
 
     app.use('/', router);
 }
