@@ -7,6 +7,9 @@ import {
 
 const router = express.Router();
 
+const multer = require('multer')
+const upload = multer({ dest: 'uploads/' })
+
 const webRouter = (app: Express) => {
     router.get('/', getHomePage);
 
@@ -24,7 +27,10 @@ const webRouter = (app: Express) => {
     //admin user
     router.get('/admin/user', adminUserPage);
     router.get('/admin/create-user', adminCreateUserPage);
-    router.post('/admin/create-user', adminCreateUser);
+    // router.post('/admin/create-user', adminCreateUser);
+    router.post('/admin/create-user', upload.single('avatar'), (req, res) => {
+        res.send('ok');
+    });
 
     router.get('/admin/product', adminProductPage);
 
