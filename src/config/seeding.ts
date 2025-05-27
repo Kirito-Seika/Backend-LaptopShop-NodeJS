@@ -1,36 +1,39 @@
 import { prisma } from "config/client";
+import { hashPassword } from "services/admin/admin.service";
+import { ACCOUNT_TYPE } from "./constant";
 
 const createDatabase = async () => {
     const countUser = await prisma.user.count();
     const countRole = await prisma.role.count();
+    const defaultPassword = await hashPassword('123456');
     if (countUser === 0) {
         await prisma.user.createMany({
             data: [
                 {
-                    username: 'Kirito Nguyen',
+                    username: 'Admin',
                     email: 'admin@gmail.com',
-                    password: '123456',
-                    address: 'Ha Noi',
+                    password: defaultPassword,
+                    address: 'Hà Nội',
                     phone: '0156241416',
-                    accountType: 'SYSTEM',
+                    accountType: ACCOUNT_TYPE.SYSTEM,
                     avatar: ''
                 },
                 {
-                    username: 'Duc Nguyen',
-                    email: 'kiritonguyen@gmail.com',
-                    password: '123456',
-                    address: 'Ha Noi',
+                    username: 'User',
+                    email: 'user@gmail.com',
+                    password: defaultPassword,
+                    address: 'Hà Nội',
                     phone: '0156241416',
-                    accountType: 'SYSTEM',
+                    accountType: ACCOUNT_TYPE.SYSTEM,
                     avatar: ''
                 },
                 {
-                    username: 'Minh Duc Nguyen',
+                    username: 'Nguyễn Minh Đức',
                     email: 'minhducnguyen.dev@gmail.com',
-                    password: '123456',
-                    address: 'Ha Noi',
+                    password: defaultPassword,
+                    address: 'Hà Nội',
                     phone: '0156241416',
-                    accountType: 'SYSTEM',
+                    accountType: ACCOUNT_TYPE.SYSTEM,
                     avatar: ''
                 }
             ]
