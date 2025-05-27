@@ -4,6 +4,7 @@ import {
     adminUserPage, adminProductPage, adminOrderPage, dashboardPage,
     adminCreateUserPage, adminCreateUser
 } from 'controllers/admin/admin.controller';
+import fileUploadMiddleware from 'src/middleware/upload.multer';
 
 const router = express.Router();
 
@@ -27,10 +28,7 @@ const webRouter = (app: Express) => {
     //admin user
     router.get('/admin/user', adminUserPage);
     router.get('/admin/create-user', adminCreateUserPage);
-    // router.post('/admin/create-user', adminCreateUser);
-    router.post('/admin/create-user', upload.single('avatar'), (req, res) => {
-        res.send('ok');
-    });
+    router.post('/admin/create-user', fileUploadMiddleware('avatar'), adminCreateUser);
 
     router.get('/admin/product', adminProductPage);
 

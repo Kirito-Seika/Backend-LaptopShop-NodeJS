@@ -1,4 +1,5 @@
 import { prisma } from "config/client";
+import { ACCOUNT_TYPE } from "config/constant";
 
 const fetchAllUsers = async () => {
     const users = await prisma.user.findMany();
@@ -21,7 +22,8 @@ const handleCreateUser = async (
             password: password,
             phone: phone,
             address: address,
-            avatar: avatar
+            avatar: avatar,
+            accountType: ACCOUNT_TYPE.SYSTEM
         }
     })
     return createUser;

@@ -20,8 +20,10 @@ const adminCreateUserPage = async (req: Request, res: Response) => {
 }
 
 const adminCreateUser = async (req: Request, res: Response) => {
-    const { username, email, password, phone, address, avatar } = req.body;
-    // await handleCreateUser(username, email, password, phone, address, avatar);
+    const { username, email, password, phone, address } = req.body;
+    const file = req.file;
+    const avatar = file?.filename ?? "";
+    await handleCreateUser(username, email, password, phone, address, avatar);
     return res.redirect('/admin/user');
 }
 
