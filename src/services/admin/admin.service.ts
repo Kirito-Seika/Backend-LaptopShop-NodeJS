@@ -38,6 +38,44 @@ const handleCreateUser = async (
     return createUser;
 }
 
+const handleDeleteUser = async (id: string) => {
+    const deleteUser = await prisma.user.delete({
+        where: {
+            id: +id
+        },
+    })
+    return deleteUser;
+}
 
+const fetchDetailUser = async (id: string) => {
+    const viewUser = await prisma.user.findUnique({
+        where: {
+            id: +id
+        },
+    })
+    return viewUser;
+}
 
-export { hashPassword, fetchAllUsers, fetchAllRoles, handleCreateUser }
+const handleUpdateUser = async (
+    id: string, username: string, phone: string,
+    address: string, avatar: string, role: string
+) => {
+    const updateUser = await prisma.user.update({
+        where: {
+            id: +id,
+        },
+        data: {
+            username: username,
+            phone: phone,
+            address: address,
+            ...(avatar !== undefined && { avatar: avatar }),
+            roleID: +role
+        },
+    })
+    return updateUser;
+}
+
+export {
+    hashPassword, fetchAllUsers, fetchAllRoles, handleCreateUser, handleDeleteUser,
+    fetchDetailUser, handleUpdateUser
+}
