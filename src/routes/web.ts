@@ -6,11 +6,17 @@ import {
     adminDetailUserPage,
     adminUpdateUser
 } from 'controllers/admin/admin.controller';
+import {
+    homePage
+} from 'controllers/client/home.controller';
 import fileUploadMiddleware from 'src/middleware/upload.multer';
 
 const router = express.Router();
 
 const webRouter = (app: Express) => {
+    //home router
+    router.get('/', homePage);
+
     //admin router
     router.get('/admin', dashboardPage);
 
