@@ -5,18 +5,7 @@ const fetchAllUser = async () => {
     return users;
 }
 
-const handleCreateUser = async (username: string, email: string, address: string) => {
-    const createUser = await prisma.user.create({
-        data: {
-            username: username,
-            email: email,
-            password: "ahihi",
-            address: address,
-            accountType: ""
-        }
-    })
-    return createUser;
-}
+
 
 const handleViewUser = async (id: string) => {
     const viewUser = await prisma.user.findUnique({
@@ -50,4 +39,4 @@ const handleDeleteUser = async (id: string) => {
     return deleteUser;
 }
 
-export { fetchAllUser, handleCreateUser, handleDeleteUser, handleViewUser, handleUpdateUser }
+export { fetchAllUser, handleDeleteUser, handleViewUser, handleUpdateUser }

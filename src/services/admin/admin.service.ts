@@ -20,7 +20,7 @@ const fetchAllRoles = async () => {
 
 const handleCreateUser = async (
     username: string, email: string, password: string,
-    phone: string, address: string, avatar: string
+    phone: string, address: string, avatar: string, role: string
 ) => {
     const defaultPassword = await hashPassword(password);
     const createUser = await prisma.user.create({
@@ -31,10 +31,13 @@ const handleCreateUser = async (
             phone: phone,
             address: address,
             avatar: avatar,
-            accountType: ACCOUNT_TYPE.SYSTEM
+            accountType: ACCOUNT_TYPE.SYSTEM,
+            roleID: +role
         }
     })
     return createUser;
 }
+
+
 
 export { hashPassword, fetchAllUsers, fetchAllRoles, handleCreateUser }

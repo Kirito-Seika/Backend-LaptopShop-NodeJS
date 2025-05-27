@@ -65,7 +65,7 @@
                                                         <th>Email</th>
                                                         <th>Address</th>
                                                         <th>Phone</th>
-                                                        <!-- <th>Role</th> -->
+                                                        <th>Role</th>
                                                         <th>Actions</th>
                                                     </tr>
                                                 </thead>
@@ -87,16 +87,24 @@
                                                             <td>
                                                                 <%=user.phone%>
                                                             </td>
-                                                            <!-- <td>
-                                                                <%=user.role%>
-                                                            </td> -->
                                                             <td>
-                                                                <button class="btn btn-sm btn-primary">
-                                                                    <i class="fas fa-edit"></i> Edit
-                                                                </button>
-                                                                <button class="btn btn-sm btn-danger">
-                                                                    <i class="fas fa-trash"></i> Delete
-                                                                </button>
+                                                                <%=user.roleID%>
+                                                            </td>
+                                                            <td>
+                                                                <div style="display: flex; gap: 15px;">
+                                                                    <form action="/delete-user/<%=user.id%>"
+                                                                        method="get">
+                                                                        <button class="btn btn-sm btn-primary">
+                                                                            <i class="fas fa-edit"></i> Edit
+                                                                        </button>
+                                                                    </form>
+                                                                    <!-- <form action="/delete-user/<%=user.id%>" -->
+                                                                    <!-- method="post"> -->
+                                                                    <button class="btn btn-sm btn-danger">
+                                                                        <i class="fas fa-trash"></i> Delete
+                                                                    </button>
+                                                                    <!-- </form> -->
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                         <% }) %>

@@ -2,7 +2,8 @@ import express, { Express } from 'express';
 import { deleteUser, getHomePage, viewUserPage, updateUser } from 'controllers/user.controller';
 import {
     adminUserPage, adminProductPage, adminOrderPage, dashboardPage,
-    adminCreateUserPage, adminCreateUser
+    adminCreateUserPage, adminCreateUser,
+    // adminDeleteUser
 } from 'controllers/admin/admin.controller';
 import fileUploadMiddleware from 'src/middleware/upload.multer';
 
@@ -13,10 +14,6 @@ const upload = multer({ dest: 'uploads/' })
 
 const webRouter = (app: Express) => {
     router.get('/', getHomePage);
-
-
-
-    router.post('/delete-user/:id', deleteUser);
 
     router.get('/view-user/:id', viewUserPage);
 
@@ -29,6 +26,7 @@ const webRouter = (app: Express) => {
     router.get('/admin/user', adminUserPage);
     router.get('/admin/create-user', adminCreateUserPage);
     router.post('/admin/create-user', fileUploadMiddleware('avatar'), adminCreateUser);
+    // router.post('/delete-user/:id', adminDeleteUser);
 
     router.get('/admin/product', adminProductPage);
 
