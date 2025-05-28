@@ -708,7 +708,7 @@ progress {
     margin-top: calc(var(--bs-gutter-y)*-1);
     margin-right: calc(var(--bs-gutter-x)/-2);
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
 }
 
 .row-2 {

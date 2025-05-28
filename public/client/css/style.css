@@ -70,8 +70,8 @@
 }
 
 .btn.border-secondary:hover {
-    background: var(--bs-secondary) !important;
-    color: var(--bs-white) !important;
+    background: var(--bs-white) !important;
+    color: #b1b1b1 !important;
 }
 
 
@@ -314,7 +314,7 @@
 }
 
 .fruite .fruite-categorie .fruite-name a:hover {
-    color: var(--bs-secondary);
+    color: #b1b1b1;
 }
 
 .fruite .fruite-item {

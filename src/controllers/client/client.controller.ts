@@ -4,4 +4,8 @@ const homePage = async (req: Request, res: Response) => {
     return res.render('client/home/layout');
 }
 
-export { homePage }
+const productPage = async (req: Request, res: Response) => {
+    return res.render('client/product/layout');
+}
+
+export { homePage, productPage }
