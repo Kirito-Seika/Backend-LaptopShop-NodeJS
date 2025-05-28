@@ -1,10 +1,7 @@
 import express, { Express } from 'express';
 import {
-    adminUserPage, adminProductPage, adminOrderPage, dashboardPage,
-    adminCreateUserPage, adminCreateUser,
-    adminDeleteUser,
-    adminDetailUserPage,
-    adminUpdateUser
+    adminUserPage, adminProductPage, adminOrderPage, dashboardPage, adminCreateUserPage, adminCreateUser, adminDeleteUser, adminDetailUserPage, adminUpdateUser,
+    adminCreateProductPage
 } from 'controllers/admin/admin.controller';
 import {
     homePage,
@@ -30,7 +27,9 @@ const webRouter = (app: Express) => {
     router.get('/admin/detail-user/:id', adminDetailUserPage);
     router.post('/admin/update-user', fileUploadMiddleware('avatar'), adminUpdateUser);
 
+    //admin product
     router.get('/admin/product', adminProductPage);
+    router.get('/admin/create-product', adminCreateProductPage);
 
     router.get('/admin/order', adminOrderPage);
 

@@ -58,13 +58,16 @@ const adminProductPage = async (req: Request, res: Response) => {
     return res.render('admin/product/layout');
 }
 
+const adminCreateProductPage = async (req: Request, res: Response) => {
+    return res.render('admin/product/create');
+}
+
 const adminOrderPage = async (req: Request, res: Response) => {
     return res.render('admin/order/layout');
 }
 
 export {
-    dashboardPage,
-    adminUserPage, adminCreateUserPage, adminCreateUser, adminDeleteUser, adminDetailUserPage, adminUpdateUser,
-    adminProductPage,
+    dashboardPage, adminUserPage, adminCreateUserPage, adminCreateUser, adminDeleteUser, adminDetailUserPage, adminUpdateUser,
+    adminProductPage, adminCreateProductPage,
     adminOrderPage,
 }
