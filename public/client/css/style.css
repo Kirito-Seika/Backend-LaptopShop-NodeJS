@@ -83,7 +83,7 @@
 }
 
 .topbar {
-    padding: 10px 5px 10px;
+    padding: 14px 5px 14px;
     border-bottom: 1px solid #ebebeb;
 }
 
@@ -113,7 +113,7 @@
 
 .topbar .top-link-3 {
     font-size: 15px;
-    color: #817d7d;
+    color: #505050;
 }
 
 .topbar .top-link a {
@@ -147,7 +147,7 @@
 .navbar .navbar-nav .nav-link.active,
 .fixed-top.bg-white .navbar .navbar-nav .nav-link:hover,
 .fixed-top.bg-white .navbar .navbar-nav .nav-link.active {
-    color: var(--bs-primary);
+    color: #b1b1b1;
 }
 
 .navbar .dropdown-toggle::after {
@@ -194,7 +194,7 @@
 
 /*** Hero Header ***/
 .hero-header {
-    background: linear-gradient(rgba(248, 223, 173, 0.1), rgba(248, 223, 173, 0.1)), url(../img/hero-img.jpg);
+    background: linear-gradient(rgba(230, 230, 230, 0.6), rgba(230, 230, 230, 0.6)), url(../img/hero-img-3.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -219,7 +219,7 @@
     height: 48px;
     border-radius: 48px;
     border: 1px solid var(--bs-white);
-    background: var(--bs-primary);
+    background: #919191;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -276,7 +276,7 @@
     bottom: -10px;
     transform: translate(-50%);
     transform: rotate(45deg);
-    background: var(--bs-secondary);
+    background: #b9babb;
 
 }
 
