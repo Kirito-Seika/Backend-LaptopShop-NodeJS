@@ -46,16 +46,37 @@ model Order {
 }
 
 model Product {
-  id         Int     @id @default(autoincrement())
-  name       String? @db.VarChar(255)
-  price      Int
-  image      String? @db.VarChar(255)
-  detailDesc String? @db.VarChar(255)
-  shortDesc  String? @db.VarChar(255)
-  quantity   Int
-  sold       Int
-  factory    String? @db.VarChar(255)
-  target     String? @db.VarChar(255)
+  id          Int     @id @default(autoincrement())
+  name        String? @db.VarChar(255)
+  price       Int
+  quantity    Int
+  image       String? @db.VarChar(255)
+  description String? @db.VarChar(255)
+  sold        Int
+  target      String? @db.VarChar(255)
+
+  category   Category @relation(fields: [categoryID], references: [id])
+  categoryID Int
+
+  factory   Factory @relation(fields: [factoryID], references: [id])
+  factoryID Int
 
   @@map("products")
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String?   @db.VarChar(255)
+  products Product[]
+
+  @@map("categories")
+}
+
+model Factory {
+  id          Int       @id @default(autoincrement())
+  name        String?   @db.VarChar(50)
+  description String?   @db.VarChar(255)
+  products    Product[]
+
+  @@map("factories")
 }

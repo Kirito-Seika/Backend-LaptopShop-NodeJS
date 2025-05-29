@@ -1,5 +1,8 @@
 import { Request, Response } from "express";
 import {
+    fetchAllCategories,
+    fetchAllFactories,
+    fetchAllProducts,
     fetchAllRoles, fetchAllUsers, fetchDetailUser,
     handleCreateUser, handleDeleteUser,
     handleUpdateUser
@@ -55,19 +58,36 @@ const adminUpdateUser = async (req: Request, res: Response) => {
 
 //CRUD Product
 const adminProductPage = async (req: Request, res: Response) => {
-    return res.render('admin/product/layout');
+    const products = await fetchAllProducts();
+    return res.render('admin/product/layout', {
+        products: products
+    });
 }
 
 const adminCreateProductPage = async (req: Request, res: Response) => {
-    return res.render('admin/product/create');
+    const factories = await fetchAllFactories();
+    const categories = await fetchAllCategories();
+    return res.render('admin/product/create', {
+        factories: factories,
+        categories: categories
+    });
 }
 
+const adminCreateProduct = async (req: Request, res: Response) => {
+    // const { username, email, password, phone, address, role } = req.body;
+    // const file = req.file;
+    // const avatar = file?.filename ?? "";
+    // await handleCreateUser(username, email, password, phone, address, avatar, role);
+    // return res.redirect('/admin/user');
+}
+
+//CRUD Order
 const adminOrderPage = async (req: Request, res: Response) => {
     return res.render('admin/order/layout');
 }
 
 export {
     dashboardPage, adminUserPage, adminCreateUserPage, adminCreateUser, adminDeleteUser, adminDetailUserPage, adminUpdateUser,
-    adminProductPage, adminCreateProductPage,
+    adminProductPage, adminCreateProductPage, adminCreateProduct,
     adminOrderPage,
 }

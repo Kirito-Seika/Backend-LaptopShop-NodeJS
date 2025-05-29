@@ -18,6 +18,21 @@ const fetchAllRoles = async () => {
     return roles;
 }
 
+const fetchAllProducts = async () => {
+    const products = await prisma.product.findMany();
+    return products;
+}
+
+const fetchAllFactories = async () => {
+    const factories = await prisma.factory.findMany();
+    return factories;
+}
+
+const fetchAllCategories = async () => {
+    const categories = await prisma.category.findMany();
+    return categories;
+}
+
 const handleCreateUser = async (
     username: string, email: string, password: string,
     phone: string, address: string, avatar: string, role: string
@@ -76,6 +91,6 @@ const handleUpdateUser = async (
 }
 
 export {
-    hashPassword, fetchAllUsers, fetchAllRoles, handleCreateUser, handleDeleteUser,
-    fetchDetailUser, handleUpdateUser
+    hashPassword, fetchAllUsers, fetchAllRoles, handleCreateUser, handleDeleteUser, fetchDetailUser, handleUpdateUser,
+    fetchAllProducts, fetchAllFactories, fetchAllCategories
 }
