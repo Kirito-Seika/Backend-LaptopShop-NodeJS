@@ -68,18 +68,39 @@ const adminProductPage = async (req: Request, res: Response) => {
 const adminCreateProductPage = async (req: Request, res: Response) => {
     const factories = await fetchAllFactories();
     const categories = await fetchAllCategories();
+    const errors = [];
+    const dataProduct = {
+        name: '',
+        price: '',
+        quantity: '',
+        description: '',
+        target: '',
+    }
     return res.render('admin/product/create', {
         factories: factories,
-        categories: categories
+        categories: categories,
+        errors: errors,
+        dataProduct
     });
 }
 
 const adminCreateProduct = async (req: Request, res: Response) => {
     const { name, price, quantity, description, target } = req.body as TProductSchema;
-    try {
-        const result = ProductValidator.parse(req.body)
-    } catch (error) {
-        console.log(error);
+    const factories = await fetchAllFactories();
+    const categories = await fetchAllCategories();
+    const validate = ProductValidator.safeParse(req.body);
+    if (validate.error) {
+        const err = validate.error.issues;
+        const errors = err?.map(item => `${item.message} (${item.path[0]})`);
+        const dataProduct = {
+            name, price, quantity, description, target
+        }
+        return res.render('admin/product/create', {
+            factories: factories,
+            categories: categories,
+            errors: errors,
+            dataProduct
+        });
     }
     // const file = req.file;
     // const avatar = file?.filename ?? "";

@@ -60,79 +60,90 @@
                                         <i class="fas fa-user-plus me-1"></i>
                                         Create New Product
                                     </div>
-                                    <div class="card-body">
-                                        <form action="/admin/create-product" method="post"
-                                            enctype="multipart/form-data">
-                                            <div class="form-row">
-                                                <div class="form-group col-sm-3 mb-3">
-                                                    <label for="name">Name</label>
-                                                    <input type="text" class="form-control" name="name">
-                                                </div>
-                                                <div class="form-group col-sm-3 mb-3">
-                                                    <label for="price">Price</label>
-                                                    <input type="number" min="0" class="form-control" name="price"
-                                                        id="inputPrice">
-                                                </div>
+                                    <% errors.forEach( function (error) { %>
+                                        <div class="alert alert-danger mb-3">
+                                            <%=error%>
+                                        </div>
 
+                                        <% }) %>
+                                            <div class="card-body">
+                                                <form action="/admin/create-product" method="post"
+                                                    enctype="multipart/form-data">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-sm-3 mb-3">
+                                                            <label for="name">Name</label>
+                                                            <input value="<%=dataProduct.name%>" type="text"
+                                                                class="form-control" name="name">
+                                                        </div>
+                                                        <div class="form-group col-sm-3 mb-3">
+                                                            <label for="price">Price</label>
+                                                            <input value="<%=dataProduct.price%>" type="number" min="0"
+                                                                class="form-control" name="price" id="inputPrice">
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="form-group col-6 mb-3">
+                                                            <label for="description">Description</label>
+                                                            <textarea class="form-control"
+                                                                name="description"><%=dataProduct.description%></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="form-group col-sm-3 mb-3">
+                                                            <label for="quantity">Quantity</label>
+                                                            <input value="<%=dataProduct.quantity%>" type="number"
+                                                                min="0" class="form-control" name="quantity"
+                                                                id="inputQuantity">
+                                                        </div>
+                                                        <div class="form-group col-sm-3 mb-3">
+                                                            <label for="target">Target</label>
+                                                            <input value="<%=dataProduct.target%>" type="text"
+                                                                class="form-control" name="target">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="form-group col-sm-3 mb-3">
+                                                            <label for="factory">Factory</label>
+                                                            <select class="form-control" name="factory">
+                                                                <% factories.forEach((factory,index)=> { %>
+                                                                    <option value="<%-factory.id %>">
+                                                                        <%- factory.name %>
+                                                                    </option>
+                                                                    <%})%>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3 mb-3">
+                                                            <label for="category">Category</label>
+                                                            <select class="form-control" name="category">
+                                                                <% categories.forEach((category,index)=> { %>
+                                                                    <option value="<%-category.id %>">
+                                                                        <%- category.name %>
+                                                                    </option>
+                                                                    <%})%>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="form-group col-6 mb-3">
+                                                            <label for="avatar">Avatar</label>
+                                                            <input type="file" class="form-control-file" id="avatarFile"
+                                                                name="avatar" accept=".png, .jpg, .jpeg">
+                                                            <img style="max-height: 250px; display: none; margin: 20px 0 10px;"
+                                                                alt="avatar preview" id="avatarPreview" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="form-group col-6 mb-3">
+                                                            <button type="submit" class="btn btn-success btn-sm">
+                                                                <i class="fas fa-save"></i> Save Product
+                                                            </button>
+                                                            <a href="/admin/product"
+                                                                class="btn btn-secondary btn-sm">Cancel</a>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-6 mb-3">
-                                                    <label for="description">Description</label>
-                                                    <textarea class="form-control" name="description"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-sm-3 mb-3">
-                                                    <label for="quantity">Quantity</label>
-                                                    <input type="number" min="0" class="form-control" name="quantity"
-                                                        id="inputQuantity">
-                                                </div>
-                                                <div class="form-group col-sm-3 mb-3">
-                                                    <label for="target">Target</label>
-                                                    <input type="text" class="form-control" name="target">
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-sm-3 mb-3">
-                                                    <label for="factory">Factory</label>
-                                                    <select class="form-control" name="factory">
-                                                        <% factories.forEach((factory,index)=> { %>
-                                                            <option value="<%-factory.id %>">
-                                                                <%- factory.name %>
-                                                            </option>
-                                                            <%})%>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-sm-3 mb-3">
-                                                    <label for="category">Category</label>
-                                                    <select class="form-control" name="category">
-                                                        <% categories.forEach((category,index)=> { %>
-                                                            <option value="<%-category.id %>">
-                                                                <%- category.name %>
-                                                            </option>
-                                                            <%})%>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-6 mb-3">
-                                                    <label for="avatar">Avatar</label>
-                                                    <input type="file" class="form-control-file" id="avatarFile"
-                                                        name="avatar" accept=".png, .jpg, .jpeg">
-                                                    <img style="max-height: 250px; display: none; margin: 20px 0 10px;"
-                                                        alt="avatar preview" id="avatarPreview" />
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-6 mb-3">
-                                                    <button type="submit" class="btn btn-success btn-sm">
-                                                        <i class="fas fa-save"></i> Save Product
-                                                    </button>
-                                                    <a href="/admin/product" class="btn btn-secondary btn-sm">Cancel</a>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
                                 </div>
 
                             </div>
