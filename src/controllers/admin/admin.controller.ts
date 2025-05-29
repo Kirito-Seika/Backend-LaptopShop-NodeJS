@@ -4,6 +4,7 @@ import {
     fetchAllFactories,
     fetchAllProducts,
     fetchAllRoles, fetchAllUsers, fetchDetailUser,
+    handleCreateProduct,
     handleCreateUser, handleDeleteUser,
     handleUpdateUser
 } from "services/admin/admin.service";
@@ -75,17 +76,16 @@ const adminCreateProductPage = async (req: Request, res: Response) => {
         quantity: '',
         description: '',
         target: '',
+        factoryID: '',
+        categoryID: '',
     }
     return res.render('admin/product/create', {
-        factories: factories,
-        categories: categories,
-        errors: errors,
-        dataProduct
+        factories, categories, errors, dataProduct
     });
 }
 
 const adminCreateProduct = async (req: Request, res: Response) => {
-    const { name, price, quantity, description, target } = req.body as TProductSchema;
+    const { name, price, quantity, description, target, factory, category } = req.body;
     const factories = await fetchAllFactories();
     const categories = await fetchAllCategories();
     const validate = ProductValidator.safeParse(req.body);
@@ -93,18 +93,17 @@ const adminCreateProduct = async (req: Request, res: Response) => {
         const err = validate.error.issues;
         const errors = err?.map(item => `${item.message} (${item.path[0]})`);
         const dataProduct = {
-            name, price, quantity, description, target
+            name, price, quantity, description, target, factoryID: factory, categoryID: category
         }
         return res.render('admin/product/create', {
-            factories: factories,
-            categories: categories,
-            errors: errors,
+            factories,
+            categories,
+            errors,
             dataProduct
         });
     }
-    // const file = req.file;
-    // const avatar = file?.filename ?? "";
-    // await handleCreateUser(username, email, password, phone, address, avatar, role);
+    const image = req?.file?.filename ?? "";
+    await handleCreateProduct(name, +price, +quantity, description, target, factory, category, image);
     return res.redirect('/admin/product');
 }
 

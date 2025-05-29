@@ -33,6 +33,7 @@ const fetchAllCategories = async () => {
     return categories;
 }
 
+//CRUD User
 const handleCreateUser = async (
     username: string, email: string, password: string,
     phone: string, address: string, avatar: string, role: string
@@ -90,7 +91,27 @@ const handleUpdateUser = async (
     return updateUser;
 }
 
+//CRUD Product
+const handleCreateProduct = async (
+    name: string, price: number, quantity: number,
+    description: string, target: string, factory: string, category: string, imageUpload: string
+) => {
+    const createProduct = await prisma.product.create({
+        data: {
+            name: name,
+            price: price,
+            quantity: quantity,
+            description: description,
+            target: target,
+            factoryID: +factory,
+            categoryID: +category,
+            ...(imageUpload && { image: imageUpload })
+        }
+    })
+    return createProduct;
+}
+
 export {
     hashPassword, fetchAllUsers, fetchAllRoles, handleCreateUser, handleDeleteUser, fetchDetailUser, handleUpdateUser,
-    fetchAllProducts, fetchAllFactories, fetchAllCategories
+    fetchAllProducts, fetchAllFactories, fetchAllCategories, handleCreateProduct
 }

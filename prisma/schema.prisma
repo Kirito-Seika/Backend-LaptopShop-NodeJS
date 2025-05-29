@@ -52,7 +52,7 @@ model Product {
   quantity    Int
   image       String? @db.VarChar(255)
   description String? @db.VarChar(255)
-  sold        Int
+  sold        Int?    @default(0)
   target      String? @db.VarChar(255)
 
   category   Category @relation(fields: [categoryID], references: [id])

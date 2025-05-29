@@ -107,7 +107,9 @@
                                                             <label for="factory">Factory</label>
                                                             <select class="form-control" name="factory">
                                                                 <% factories.forEach((factory,index)=> { %>
-                                                                    <option value="<%-factory.id %>">
+                                                                    <option value="<%-factory.id %>"
+                                                                        <%=factory.id==dataProduct.factoryID
+                                                                        ? 'selected' : '' %>>
                                                                         <%- factory.name %>
                                                                     </option>
                                                                     <%})%>
@@ -117,7 +119,9 @@
                                                             <label for="category">Category</label>
                                                             <select class="form-control" name="category">
                                                                 <% categories.forEach((category,index)=> { %>
-                                                                    <option value="<%-category.id %>">
+                                                                    <option value="<%-category.id %>"
+                                                                        <%=category.id==dataProduct.categoryID
+                                                                        ? 'selected' : '' %>>
                                                                         <%- category.name %>
                                                                     </option>
                                                                     <%})%>
@@ -126,9 +130,9 @@
                                                     </div>
                                                     <div class="form-row">
                                                         <div class="form-group col-6 mb-3">
-                                                            <label for="avatar">Avatar</label>
+                                                            <label for="image">Avatar</label>
                                                             <input type="file" class="form-control-file" id="avatarFile"
-                                                                name="avatar" accept=".png, .jpg, .jpeg">
+                                                                name="image" accept=".png, .jpg, .jpeg">
                                                             <img style="max-height: 250px; display: none; margin: 20px 0 10px;"
                                                                 alt="avatar preview" id="avatarPreview" />
                                                         </div>
