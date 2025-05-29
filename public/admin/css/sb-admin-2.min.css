@@ -12609,3 +12609,11 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
     width: 100%
 }
+
+.ellipsis-cell {
+    max-width: 200px;
+    /* điều chỉnh tùy nhu cầu */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
