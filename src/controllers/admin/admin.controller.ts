@@ -7,6 +7,7 @@ import {
     handleCreateUser, handleDeleteUser,
     handleUpdateUser
 } from "services/admin/admin.service";
+import { ProductValidator, TProductSchema } from "src/validation/product.validator";
 
 const dashboardPage = async (req: Request, res: Response) => {
     return res.render('admin/dashboard/layout');
@@ -74,11 +75,16 @@ const adminCreateProductPage = async (req: Request, res: Response) => {
 }
 
 const adminCreateProduct = async (req: Request, res: Response) => {
-    // const { username, email, password, phone, address, role } = req.body;
+    const { name, price, quantity, description, target } = req.body as TProductSchema;
+    try {
+        const result = ProductValidator.parse(req.body)
+    } catch (error) {
+        console.log(error);
+    }
     // const file = req.file;
     // const avatar = file?.filename ?? "";
     // await handleCreateUser(username, email, password, phone, address, avatar, role);
-    // return res.redirect('/admin/user');
+    return res.redirect('/admin/product');
 }
 
 //CRUD Order
