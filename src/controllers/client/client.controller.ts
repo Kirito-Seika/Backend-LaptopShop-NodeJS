@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { fetchProducts } from "services/client/home.service";
+import { fetchAllCategories } from "services/admin/admin.service";
+import { fetchProductById, fetchProducts, fetchRandomProducts } from "services/client/home.service";
 
 const homePage = async (req: Request, res: Response) => {
     const products = await fetchProducts();
@@ -7,7 +8,11 @@ const homePage = async (req: Request, res: Response) => {
 }
 
 const productPage = async (req: Request, res: Response) => {
-    return res.render('client/product/layout');
+    const { id } = req.params;
+    const products = await fetchRandomProducts(+id);
+    const detailProduct = await fetchProductById(+id);
+    const categories = await fetchAllCategories();
+    return res.render('client/product/layout', { products, detailProduct, categories });
 }
 
 export { homePage, productPage }

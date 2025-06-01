@@ -54,6 +54,10 @@ model Product {
   description String? @db.MediumText
   sold        Int?    @default(0)
   target      String? @db.VarChar(255)
+  weight      Float?  @default(0)
+  material    String? @db.VarChar(255)
+  dimension   String? @db.VarChar(255)
+  country     String? @db.VarChar(255)
 
   category   Category @relation(fields: [categoryID], references: [id])
   categoryID Int

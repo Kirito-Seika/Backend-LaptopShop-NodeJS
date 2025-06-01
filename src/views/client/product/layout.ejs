@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <title>L&P</title>
+    <title>L&P - <%=detailProduct.name%>
+    </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -55,15 +56,21 @@
                             <div class="col-lg-6">
                                 <div class="border rounded">
                                     <a href="#">
-                                        <img src="/client/img/product/enlarged-1.jpg" class="img-fluid rounded"
-                                            alt="Image">
+                                        <img src="/client/img/product/<%=detailProduct.image%>"
+                                            class="img-fluid rounded" alt="Image">
                                     </a>
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <h4 class="fw-bold mb-3">VLS 911 high-end women's handbag</h4>
-                                <p class="mb-3">Category: Handbag</p>
-                                <h5 class="fw-bold mb-3">38,5 $</h5>
+                                <h4 class="fw-bold mb-3">
+                                    <%=detailProduct.name%>
+                                </h4>
+                                <p class="mb-3">Loại: <%= detailProduct.category.name %>
+                                </p>
+                                <h5 class="fw-bold mb-3">
+                                    <%=new Intl.NumberFormat("de-DE", { style: "currency" , currency: "VND" }).format(
+                                        detailProduct.price ),%>
+                                </h5>
                                 <div class="d-flex mb-4">
                                     <i class="fa fa-star text-secondary"></i>
                                     <i class="fa fa-star text-secondary"></i>
@@ -71,10 +78,12 @@
                                     <i class="fa fa-star text-secondary"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
-                                <p class="mb-4">Material: Premium cowhide leather.</p>
-                                <p class="mb-4">Dimensions: 22 cm x 15 cm x 9 cm</p>
+                                <p class="mb-4">Chất liệu: <%= detailProduct.material %>
+                                </p>
+                                <p class="mb-4">Kích Thước: <%= detailProduct.dimension %>
+                                </p>
                                 <p class="mb-4">
-                                    Commitment: Gento guarantees a refund if the bag is not as described.
+                                    Cam kết: Nếu sản phẩm không đúng như mô tả, cửa hàng sẽ hoàn trả toàn bộ số tiền.
                                 </p>
                                 <div class="input-group quantity mb-5" style="width: 100px;">
                                     <div class="input-group-btn">
@@ -111,61 +120,54 @@
                                 <div class="tab-content mb-5">
                                     <div class="tab-pane active" id="nav-about" role="tabpanel"
                                         aria-labelledby="nav-about-tab">
-                                        <p>Crafted from premium cowhide leather, this elegant handbag combines timeless
-                                            design with everyday functionality. With its compact size of 22 cm x 15 cm x
-                                            9 cm, it's perfect for carrying your essentials in style — whether you're
-                                            heading to the office or enjoying a night out.</p>
-
-                                        <p>At Gento, we take pride in authenticity and quality. That’s why we guarantee
-                                            a full refund if the bag is not made from genuine leather or differs from
-                                            the product images. Shop with confidence and elevate your wardrobe with a
-                                            piece that speaks of sophistication and trust.</p>
+                                        <p>
+                                            <%= detailProduct.description %>
+                                        </p>
                                         <div class="px-2">
                                             <div class="row g-4">
                                                 <div class="col-6">
                                                     <div
                                                         class="row bg-light align-items-center text-center justify-content-center py-2">
                                                         <div class="col-6">
-                                                            <p class="mb-0">Weight</p>
+                                                            <p class="mb-0">Khối lượng</p>
                                                         </div>
                                                         <div class="col-6">
-                                                            <p class="mb-0">0.5 kg</p>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        class="row text-center align-items-center justify-content-center py-2">
-                                                        <div class="col-6">
-                                                            <p class="mb-0">Country of Origin</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <p class="mb-0">VietNam</p>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        class="row bg-light text-center align-items-center justify-content-center py-2">
-                                                        <div class="col-6">
-                                                            <p class="mb-0">Quality</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <p class="mb-0">Cowhide</p>
+                                                            <p class="mb-0">
+                                                                <%= detailProduct.weight %> kg
+                                                            </p>
                                                         </div>
                                                     </div>
                                                     <div
                                                         class="row text-center align-items-center justify-content-center py-2">
                                                         <div class="col-6">
-                                                            <p class="mb-0">Check</p>
+                                                            <p class="mb-0">Xuất xứ</p>
                                                         </div>
                                                         <div class="col-6">
-                                                            <p class="mb-0">Limit</p>
+                                                            <p class="mb-0">
+                                                                <%= detailProduct.country %>
+                                                            </p>
                                                         </div>
                                                     </div>
                                                     <div
                                                         class="row bg-light text-center align-items-center justify-content-center py-2">
                                                         <div class="col-6">
-                                                            <p class="mb-0">Dimensions</p>
+                                                            <p class="mb-0">Chất liệu</p>
                                                         </div>
                                                         <div class="col-6">
-                                                            <p class="mb-0">22 cm x 15 cm x 9 cm</p>
+                                                            <p class="mb-0">
+                                                                <%= detailProduct.material %>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="row text-center align-items-center justify-content-center py-2">
+                                                        <div class="col-6">
+                                                            <p class="mb-0">Kích thước</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0">
+                                                                <%= detailProduct.dimension %>
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -277,111 +279,52 @@
                                             class="fa fa-search"></i></span>
                                 </div>
                                 <div class="mb-4">
-                                    <h4>Categories</h4>
+                                    <h4>Loại Sản Phẩm</h4>
                                     <ul class="list-unstyled fruite-categorie">
-                                        <li>
-                                            <div class="d-flex justify-content-between fruite-name">
-                                                <a href="#"><i class="fas fa-shopping-bag me-2"></i>Handbag</a>
-                                                <span>(3)</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="d-flex justify-content-between fruite-name">
-                                                <a href="#"><i class="fas fa-shopping-bag me-2"></i>Trousers</a>
-                                                <span>(5)</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="d-flex justify-content-between fruite-name">
-                                                <a href="#"><i class="fas fa-shopping-bag me-2"></i>Shirt</a>
-                                                <span>(2)</span>
-                                            </div>
-                                        </li>
+                                        <% categories.forEach( function (category) { %>
+                                            <li>
+                                                <div class="d-flex justify-content-between fruite-name">
+                                                    <a href="#"><i class="fas fa-shopping-bag me-2"></i>
+                                                        <%= category.name %>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <% }) %>
                                     </ul>
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <h4 class="mb-4">Featured products</h4>
-                                <div style="gap: 20px;" class="d-flex align-items-center justify-content-start">
-                                    <div class="rounded" style="width: 100px; height: 100px;">
-                                        <img src="/client/img/product/enlarged-slider-2.jpg" class="img-fluid rounded"
-                                            alt="Image">
+                                <h4 class="mb-4">Sản Phẩm Khác</h4>
+                                <% products.forEach( function (product) { %>
+                                    <div style="margin-bottom: 20px;">
+                                        <a href="/product/<%=product.id%>" style="gap: 20px;"
+                                            class="d-flex align-items-center justify-content-start">
+                                            <div class="rounded" style="width: 85px;">
+                                                <img src="/client/img/product/<%=product.image%>"
+                                                    class="img-fluid rounded" alt="Image">
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-2">
+                                                    <%=product.name%>
+                                                </h6>
+                                                <div class="d-flex mb-2">
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                </div>
+                                                <div class=" mb-2">
+                                                    <h5 class="fw-bold me-2">
+                                                        <%=new Intl.NumberFormat("de-DE", { style: "currency" ,
+                                                            currency: "VND" }).format( product.price ),%>
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                        </a>
+
                                     </div>
-                                    <div>
-                                        <h6 class="mb-2">Handmade VLS 9006</h6>
-                                        <div class="d-flex mb-2">
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <div class="d-flex mb-2">
-                                            <h5 class="fw-bold me-2">96,34 $</h5>
-                                            <h5 class="text-danger text-decoration-line-through">111,75 $</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="gap: 20px;" class="d-flex align-items-center justify-content-start">
-                                    <div class="rounded" style="width: 100px; height: 100px;">
-                                        <img src="/client/img/product/enlarged-slider-3.jpg" class="img-fluid rounded"
-                                            alt="">
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-2">Handmade VLS 9005</h6>
-                                        <div class="d-flex mb-2">
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <div class="d-flex mb-2">
-                                            <h5 class="fw-bold me-2">53,95 $</h5>
-                                            <h5 class="text-danger text-decoration-line-through">65,51 $</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="gap: 20px;" class="d-flex align-items-center justify-content-start">
-                                    <div class="rounded" style="width: 100px; height: 100px;">
-                                        <img src="/client/img/product/enlarged-slider-4.jpg" class="img-fluid rounded"
-                                            alt="">
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-2">Handmade VLS 9004</h6>
-                                        <div class="d-flex mb-2">
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <div class="d-flex mb-2">
-                                            <h5 class="fw-bold me-2">53,95 $</h5>
-                                            <h5 class="text-danger text-decoration-line-through">65,51 $</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="gap: 20px;" class="d-flex align-items-center justify-content-start">
-                                    <div class="rounded" style="width: 100px; height: 100px;">
-                                        <img src="/client/img/product/enlarged-slider-5.jpg" class="img-fluid rounded"
-                                            alt="">
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-2">Handmade VLS 9003</h6>
-                                        <div class="d-flex mb-2">
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <div class="d-flex mb-2">
-                                            <h5 class="fw-bold me-2">38,50 $</h5>
-                                            <h5 class="text-danger text-decoration-line-through">73,22 $</h5>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <% }) %>
                             </div>
                             <div class="col-lg-12">
                                 <div class="position-relative">
