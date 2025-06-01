@@ -51,7 +51,7 @@ model Product {
   price       Int
   quantity    Int
   image       String? @db.VarChar(255)
-  description String? @db.VarChar(255)
+  description String? @db.MediumText
   sold        Int?    @default(0)
   target      String? @db.VarChar(255)
 

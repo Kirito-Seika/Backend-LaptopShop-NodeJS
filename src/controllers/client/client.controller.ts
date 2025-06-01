@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
+import { fetchProducts } from "services/client/home.service";
 
 const homePage = async (req: Request, res: Response) => {
-    return res.render('client/home/layout');
+    const products = await fetchProducts();
+    return res.render('client/home/layout', { products });
 }
 
 const productPage = async (req: Request, res: Response) => {
