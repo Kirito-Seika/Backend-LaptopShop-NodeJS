@@ -3,9 +3,10 @@ import {
     fetchAllCategories,
     fetchAllFactories,
     fetchAllProducts,
-    fetchAllRoles, fetchAllUsers, fetchDetailUser,
+    fetchAllRoles, fetchAllUsers, fetchDetailProduct, fetchDetailUser,
     handleCreateProduct,
-    handleCreateUser, handleDeleteUser,
+    handleCreateUser, handleDeleteProduct, handleDeleteUser,
+    handleUpdateProduct,
     handleUpdateUser
 } from "services/admin/admin.service";
 import { ProductValidator, TProductSchema } from "src/validation/product.validator";
@@ -89,21 +90,65 @@ const adminCreateProduct = async (req: Request, res: Response) => {
     const factories = await fetchAllFactories();
     const categories = await fetchAllCategories();
     const validate = ProductValidator.safeParse(req.body);
-    if (validate.error) {
-        const err = validate.error.issues;
-        const errors = err?.map(item => `${item.message} (${item.path[0]})`);
+    if (!validate.success) {
+        const fieldErrors: Record<string, string> = {};
+        for (const issue of validate.error.issues) {
+            const field = issue.path[0] as string;
+            fieldErrors[field] = issue.message;
+        }
         const dataProduct = {
             name, price, quantity, description, target, factoryID: factory, categoryID: category
         }
         return res.render('admin/product/create', {
             factories,
             categories,
-            errors,
+            fieldErrors,
             dataProduct
         });
     }
     const image = req?.file?.filename ?? "";
     await handleCreateProduct(name, +price, +quantity, description, target, factory, category, image);
+    return res.redirect('/admin/product');
+}
+
+const adminDetailProductPage = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const product = await fetchDetailProduct(id);
+    const factories = await fetchAllFactories();
+    const categories = await fetchAllCategories();
+    const errors = [];
+    return res.render('admin/product/detail', { factories, categories, errors, product });
+}
+
+const adminUpdateProduct = async (req: Request, res: Response) => {
+    const { id, name, price, quantity, description, target, factory, category, oldImage } = req.body;
+    const factories = await fetchAllFactories();
+    const categories = await fetchAllCategories();
+    const validate = ProductValidator.safeParse(req.body);
+    const image = req?.file?.filename ?? req.body.oldImage;
+    if (!validate.success) {
+        const fieldErrors: Record<string, string> = {};
+        for (const issue of validate.error.issues) {
+            const field = issue.path[0] as string;
+            fieldErrors[field] = issue.message;
+        }
+        const product = {
+            id, name, price, quantity, description, target, factoryID: factory, categoryID: category, image
+        }
+        return res.render('admin/product/detail', {
+            factories,
+            categories,
+            fieldErrors,
+            product
+        });
+    }
+    await handleUpdateProduct(id, name, +price, +quantity, description, target, factory, category, image);
+    return res.redirect('/admin/product');
+}
+
+const adminDeleteProduct = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    await handleDeleteProduct(id);
     return res.redirect('/admin/product');
 }
 
@@ -114,6 +159,6 @@ const adminOrderPage = async (req: Request, res: Response) => {
 
 export {
     dashboardPage, adminUserPage, adminCreateUserPage, adminCreateUser, adminDeleteUser, adminDetailUserPage, adminUpdateUser,
-    adminProductPage, adminCreateProductPage, adminCreateProduct,
+    adminProductPage, adminCreateProductPage, adminCreateProduct, adminDetailProductPage, adminDeleteProduct, adminUpdateProduct,
     adminOrderPage,
 }

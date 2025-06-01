@@ -111,7 +111,47 @@ const handleCreateProduct = async (
     return createProduct;
 }
 
+const fetchDetailProduct = async (id: string) => {
+    const viewProduct = await prisma.product.findUnique({
+        where: {
+            id: +id
+        },
+    })
+    return viewProduct;
+}
+
+const handleUpdateProduct = async (
+    id: string, name: string, price: number, quantity: number,
+    description: string, target: string, factory: string, category: string, imageUpload: string
+) => {
+    const updateProduct = await prisma.product.update({
+        where: {
+            id: +id,
+        },
+        data: {
+            name: name,
+            price: price,
+            quantity: quantity,
+            description: description,
+            target: target,
+            factoryID: +factory,
+            categoryID: +category,
+            ...(imageUpload && { image: imageUpload })
+        },
+    })
+    return updateProduct;
+}
+
+const handleDeleteProduct = async (id: string) => {
+    const deleteProduct = await prisma.product.delete({
+        where: {
+            id: +id
+        },
+    })
+    return deleteProduct;
+}
+
 export {
     hashPassword, fetchAllUsers, fetchAllRoles, handleCreateUser, handleDeleteUser, fetchDetailUser, handleUpdateUser,
-    fetchAllProducts, fetchAllFactories, fetchAllCategories, handleCreateProduct
+    fetchAllProducts, fetchAllFactories, fetchAllCategories, handleCreateProduct, fetchDetailProduct, handleDeleteProduct, handleUpdateProduct
 }
