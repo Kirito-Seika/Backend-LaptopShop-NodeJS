@@ -4,6 +4,9 @@ const fetchProducts = async (excludeId?: number) => {
     const products = await prisma.product.findMany({
         where: excludeId ? { id: { not: excludeId } } : {},
         take: 12,
+        include: {
+            category: true,
+        },
     });
     return products;
 }

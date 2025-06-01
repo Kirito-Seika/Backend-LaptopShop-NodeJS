@@ -513,7 +513,7 @@ const createDatabase = async () => {
                         address: 'Hà Nội',
                         phone: '0156241416',
                         accountType: ACCOUNT_TYPE.SYSTEM,
-                        avatar: '',
+                        avatar: 'admin.png',
                         roleID: adminRole.id
                     },
                     {
@@ -523,7 +523,7 @@ const createDatabase = async () => {
                         address: 'Hà Nội',
                         phone: '0156241416',
                         accountType: ACCOUNT_TYPE.SYSTEM,
-                        avatar: '',
+                        avatar: 'user.png',
                         roleID: userRole.id
                     },
                     {
@@ -533,7 +533,7 @@ const createDatabase = async () => {
                         address: 'Hà Nội',
                         phone: '0156241416',
                         accountType: ACCOUNT_TYPE.SYSTEM,
-                        avatar: '',
+                        avatar: 'admin-girl.png',
                         roleID: adminRole.id
                     }
                 ]
