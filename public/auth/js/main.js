@@ -1,27 +1,19 @@
-const setupPasswordToggle = (inputId, toggleIconId) => {
+/*=============== SHOW HIDE PASSWORD FOR LOGIN AND REGISTER ===============*/
+const passwordToggle = (inputId, eyeId) => {
    const input = document.getElementById(inputId);
-   const icon = document.getElementById(toggleIconId);
+   const eyeIcon = document.getElementById(eyeId);
 
-   if (!input || !icon) return;
+   if (!input || !eyeIcon) return;
 
-   icon.addEventListener("click", () => {
-      const isPassword = input.type === "password";
-      input.type = isPassword ? "text" : "password";
-
-      // Toggle eye icon class
-      icon.classList.toggle("ri-eye-fill", !isPassword);
-      icon.classList.toggle("ri-eye-off-fill", isPassword);
+   eyeIcon.addEventListener('click', () => {
+      input.type = input.type === 'password' ? 'text' : 'password';
+      eyeIcon.classList.toggle('ri-eye-fill');
+      eyeIcon.classList.toggle('ri-eye-off-fill');
    });
 };
 
-// ================= INIT FUNCTION ON DOM LOAD =================
-document.addEventListener("DOMContentLoaded", () => {
-   // Login form
-   setupPasswordToggle("password", "loginPassword");
-
-   // Register form
-   setupPasswordToggle("passwordRegister", "registerPassword");
-
-   // Nếu bạn có thêm trường xác nhận mật khẩu:
-   setupPasswordToggle("passwordConfirm", "confirmPasswordEye");
+window.addEventListener('DOMContentLoaded', () => {
+   passwordToggle('password', 'loginPassword'); // login password
+   passwordToggle('passwordRegister', 'registerPassword'); // register password
+   passwordToggle('passwordConfirm', 'confirmPasswordEye'); // confirm password
 });

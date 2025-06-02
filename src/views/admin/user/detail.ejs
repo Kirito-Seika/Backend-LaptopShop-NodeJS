@@ -65,37 +65,56 @@
                                     <div class="card-body">
                                         <form action="/admin/update-user" method="post" enctype="multipart/form-data">
                                             <div class="form-row">
-                                                <input value="<%=user.id%>" type="text" class="form-control" name="id"
-                                                    style="display: none;">
+                                                <input value="<%=dataUser.id%>" type="text" class="form-control"
+                                                    name="id" style="display: none;">
+                                                <input type="hidden" name="oldImage" value="<%= dataUser.avatar %>">
                                                 <div class="form-group col-sm-3 mb-3">
                                                     <label for="name">Username</label>
-                                                    <input value="<%=user.username%>" type="text" class="form-control"
-                                                        name="username" required>
+                                                    <input value="<%=dataUser.username%>" type="text"
+                                                        class="form-control" name="username">
+                                                    <% if (typeof fieldErrors !=='undefined' && fieldErrors.username) {
+                                                        %>
+                                                        <span class="text-danger">
+                                                            <%= fieldErrors.username %>
+                                                        </span>
+                                                        <% } %>
                                                 </div>
                                                 <div class="form-group col-sm-3 mb-3">
                                                     <label for="email">Email</label>
-                                                    <input value="<%=user.email%>" type="email" class="form-control"
-                                                        name="email" disabled>
+                                                    <input value="<%=dataUser.email%>" type="email" class="form-control"
+                                                        name="email" readonly>
+
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-6 mb-3">
                                                     <label for="address">Address</label>
-                                                    <input value="<%=user.address%>" type="text" class="form-control"
-                                                        name="address" required>
+                                                    <input value="<%=dataUser.address%>" type="text"
+                                                        class="form-control" name="address">
+                                                    <% if (typeof fieldErrors !=='undefined' && fieldErrors.address) {
+                                                        %>
+                                                        <span class="text-danger">
+                                                            <%= fieldErrors.address %>
+                                                        </span>
+                                                        <% } %>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-sm-3 mb-3">
                                                     <label for="phone">Phone</label>
-                                                    <input value="<%=user.phone%>" type="tel" class="form-control"
-                                                        name="phone" required>
+                                                    <input value="<%=dataUser.phone%>" type="tel" class="form-control"
+                                                        name="phone">
+                                                    <% if (typeof fieldErrors !=='undefined' && fieldErrors.phone) { %>
+                                                        <span class="text-danger">
+                                                            <%= fieldErrors.phone %>
+                                                        </span>
+                                                        <% } %>
                                                 </div>
                                                 <div class="form-group col-sm-3 mb-3">
                                                     <label for="role">Role</label>
                                                     <select class="form-control" name="role">
                                                         <% roles.forEach((role,index)=> { %>
-                                                            <option value="<%-role.id %>" <%=role.id===user.roleID
+                                                            <option value="<%-role.id %>" <%=role.id==dataUser.roleID
                                                                 ? 'selected' : '' %>>
                                                                 <%- role.name %>
                                                             </option>
@@ -108,10 +127,10 @@
                                                     <label for="avatar">Avatar</label>
                                                     <input type="file" class="form-control-file" id="avatarFile"
                                                         name="avatar" accept=".png, .jpg, .jpeg" src="">
-                                                    <% if (user.avatar) { %>
+                                                    <% if (dataUser.avatar) { %>
                                                         <img style="max-height: 250px; display: block; margin: 20px 0 10px;"
                                                             alt="avatar preview" id="avatarPreview"
-                                                            src="/images/<%=user.avatar%>" />
+                                                            src="/images/<%=dataUser.avatar%>" />
                                                         <% } else { %>
                                                             <img style="max-height: 250px; display: none; margin: 20px 0 10px;"
                                                                 alt="avatar preview" id="avatarPreview" />

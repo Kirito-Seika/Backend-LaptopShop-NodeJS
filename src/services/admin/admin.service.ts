@@ -8,6 +8,19 @@ const hashPassword = async (plainText: string) => {
     return await bcrypt.hash(plainText, saltRounds)
 }
 
+const checkEmail = async (email: string) => {
+    const user = await prisma.user.findUnique({
+        where: {
+            email: email
+        }
+    })
+    if (user) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 const fetchAllUsers = async () => {
     const users = await prisma.user.findMany({
         include: {
@@ -45,12 +58,12 @@ const handleCreateUser = async (
     const defaultPassword = await hashPassword(password);
     const createUser = await prisma.user.create({
         data: {
-            username: username,
-            email: email,
+            username,
+            email,
             password: defaultPassword,
-            phone: phone,
-            address: address,
-            avatar: avatar,
+            phone,
+            address,
+            avatar,
             accountType: ACCOUNT_TYPE.SYSTEM,
             roleID: +role
         }
@@ -85,9 +98,9 @@ const handleUpdateUser = async (
             id: +id,
         },
         data: {
-            username: username,
-            phone: phone,
-            address: address,
+            username,
+            phone,
+            address,
             ...(avatar !== undefined && { avatar: avatar }),
             roleID: +role
         },
@@ -151,5 +164,5 @@ const handleDeleteProduct = async (id: string) => {
 
 export {
     hashPassword, fetchAllUsers, fetchAllRoles, handleCreateUser, handleDeleteUser, fetchDetailUser, handleUpdateUser,
-    fetchAllProducts, fetchAllFactories, fetchAllCategories, handleCreateProduct, fetchDetailProduct, handleDeleteProduct, handleUpdateProduct
+    fetchAllProducts, fetchAllFactories, fetchAllCategories, handleCreateProduct, fetchDetailProduct, handleDeleteProduct, handleUpdateProduct, checkEmail
 }
