@@ -120,7 +120,7 @@ img {
 
 .login__box {
   position: relative;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   background-color: var(--container-color);
   border-radius: 1rem;

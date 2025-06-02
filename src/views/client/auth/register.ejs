@@ -53,51 +53,115 @@
             <h1 class="login__title">Đăng Ký</h1>
 
             <div class="login__area">
-                <form action="" class="login__form">
-                    <div class="login__content flex">
-                        <div class="login__box">
-                            <input type="text" name="username" required placeholder=" " class="login__input">
-                            <label for="username" class="login__label">Username</label>
-                            <i class="ri-id-card-fill login__icon"></i>
+                <form action="/register" method="post" class="login__form" enctype="multipart/form-data">
+                    <div style="display: flex; justify-content: space-between;">
+                        <div class="login__content">
+                            <div class="login__box">
+                                <input value="<%=dataUser.username%>" type="text" name="username" placeholder=" "
+                                    class="login__input">
+                                <label for="username" class="login__label">Username</label>
+                                <i class="ri-id-card-fill login__icon"></i>
+                            </div>
+                            <div>
+                                <% if (typeof fieldErrors !=='undefined' && fieldErrors.username) { %>
+                                    <span class="text-danger">
+                                        <%= fieldErrors.username %>
+                                    </span>
+                                    <% } %>
+                            </div>
                         </div>
-
-                        <div class="login__box">
-                            <input type="email" name="email" required placeholder=" " class="login__input">
-                            <label for="email" class="login__label">Email</label>
-                            <i class="ri-mail-fill login__icon"></i>
-                        </div>
-                    </div>
-                    <div class="login__content flex margin-top">
-                        <div class="login__box">
-                            <input type="password" name="password" id="password" placeholder=" "
-                                class="login__input login__input__pass">
-                            <label for="password" class="login__label">Password</label>
-                            <i class="ri-eye-off-fill login__icon login__password" id="registerPassword"></i>
-                        </div>
-                    </div>
-                    <div class="login__content flex margin-top">
-                        <div class="login__box">
-                            <input type="number" name="phone" placeholder=" " class="login__input">
-                            <label for="phone" class="login__label">Phone</label>
-
-                            <i class="ri-phone-fill login__icon"></i>
-                        </div>
-                        <div class="login__box">
-                            <input type="text" name="address" placeholder=" " class="login__input">
-                            <label for="address" class="login__label">Address</label>
-                            <i class="ri-id-card-fill login__icon"></i>
+                        <div class="login__content">
+                            <div class="login__box">
+                                <input value="<%=dataUser.email%>" type="email" name="email" placeholder=" "
+                                    class="login__input">
+                                <label for="email" class="login__label">Email</label>
+                                <i class="ri-mail-fill login__icon"></i>
+                            </div>
+                            <div>
+                                <% if (typeof fieldErrors !=='undefined' && fieldErrors.email) { %>
+                                    <span class="text-danger">
+                                        <%= fieldErrors.email %>
+                                    </span>
+                                    <% } %>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-row">
 
-
+                    <div style="display: flex; justify-content: space-between;">
+                        <div class="login__content margin-top">
+                            <div class="login__box">
+                                <input value="<%=dataUser.password%>" type="password" name="password"
+                                    id="passwordRegister" placeholder=" " class="login__input">
+                                <label for="password" class="login__label">Password</label>
+                                <i class="ri-eye-off-fill login__icon login__password" id="registerPassword"></i>
+                            </div>
+                            <div>
+                                <% if (typeof fieldErrors !=='undefined' && fieldErrors.password) { %>
+                                    <span class="text-danger">
+                                        <%= fieldErrors.password %>
+                                    </span>
+                                    <% } %>
+                            </div>
+                        </div>
+                        <div class="login__content margin-top">
+                            <div class="login__box">
+                                <input value="<%=dataUser.confirmPassword%>" type="password" name="confirmPassword"
+                                    id="passwordConfirm" placeholder=" " class="login__input">
+                                <label for="confirmPassword" class="login__label">Confirm Password</label>
+                                <i class="ri-eye-off-fill login__icon login__password" id="confirmPasswordEye"></i>
+                            </div>
+                            <div>
+                                <% if (typeof fieldErrors !=='undefined' && fieldErrors.confirmPassword) { %>
+                                    <span class="text-danger">
+                                        <%= fieldErrors.confirmPassword %>
+                                    </span>
+                                    <% } else if (dataUser.password !==dataUser.confirmPassword) { %>
+                                        <span class="text-danger">Mật khẩu xác nhận không khớp</span>
+                                        <% } %>
+                            </div>
+                        </div>
                     </div>
+
+                    <div style="display: flex; justify-content: space-between;">
+                        <div class="login__content margin-top">
+                            <div class="login__box">
+                                <input value="<%=dataUser.phone%>" type="number" name="phone" min="0" placeholder=" "
+                                    class="login__input">
+                                <label for="phone" class="login__label">Phone</label>
+                                <i class="ri-phone-fill login__icon"></i>
+                            </div>
+                            <div>
+                                <% if (typeof fieldErrors !=='undefined' && fieldErrors.phone) { %>
+                                    <span class="text-danger">
+                                        <%= fieldErrors.phone %>
+                                    </span>
+                                    <% } %>
+                            </div>
+                        </div>
+                        <div class="login__content margin-top">
+                            <div class="login__box">
+                                <input value="<%=dataUser.address%>" type="text" name="address" placeholder=" "
+                                    class="login__input">
+                                <label for="address" class="login__label">Address</label>
+                                <i class="ri-id-card-fill login__icon"></i>
+                            </div>
+                            <div>
+                                <% if (typeof fieldErrors !=='undefined' && fieldErrors.address) { %>
+                                    <span class="text-danger">
+                                        <%= fieldErrors.address %>
+                                    </span>
+                                    <% } %>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="login__content flex margin-top">
 
                         <div class="form-group col-6">
                             <label for="avatar">Avatar</label>
                             <input type="file" class="form-control-file" id="avatarFile" name="avatar"
-                                accept=".png, .jpg, .jpeg" required>
+                                accept=".png, .jpg, .jpeg">
                             <img style="max-height: 250px; display: none; margin: 20px 0 10px;" alt="avatar preview"
                                 id="avatarPreview" />
                         </div>

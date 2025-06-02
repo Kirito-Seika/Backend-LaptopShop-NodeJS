@@ -10,6 +10,7 @@ CREATE TABLE `users` (
     `avatar` VARCHAR(255) NULL,
     `roleID` INTEGER NOT NULL,
 
+    UNIQUE INDEX `users_email_key`(`email`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -19,6 +20,7 @@ CREATE TABLE `roles` (
     `name` VARCHAR(50) NULL,
     `description` VARCHAR(255) NULL,
 
+    UNIQUE INDEX `roles_name_key`(`name`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
