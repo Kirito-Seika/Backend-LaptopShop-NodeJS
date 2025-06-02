@@ -126,6 +126,53 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-sm-3 mb-3">
+                                                    <label for="weight">Weight</label>
+                                                    <input value="<%=dataProduct.weight%>" type="number" min="0"
+                                                        step="0.01" class="form-control" name="weight">
+                                                    <% if (typeof fieldErrors !=='undefined' && fieldErrors.weight) { %>
+                                                        <span class="text-danger">
+                                                            <%= fieldErrors.weight %>
+                                                        </span>
+                                                        <% } %>
+                                                </div>
+                                                <div class="form-group col-sm-3 mb-3">
+                                                    <label for="target">Material</label>
+                                                    <input value="<%=dataProduct.material%>" type="text"
+                                                        class="form-control" name="material">
+                                                    <% if (typeof fieldErrors !=='undefined' && fieldErrors.material) {
+                                                        %>
+                                                        <span class="text-danger">
+                                                            <%= fieldErrors.material %>
+                                                        </span>
+                                                        <% } %>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-sm-3 mb-3">
+                                                    <label for="target">Dimension</label>
+                                                    <input value="<%=dataProduct.dimension%>" type="text"
+                                                        class="form-control" name="dimension">
+                                                    <% if (typeof fieldErrors !=='undefined' && fieldErrors.dimension) {
+                                                        %>
+                                                        <span class="text-danger">
+                                                            <%= fieldErrors.dimension %>
+                                                        </span>
+                                                        <% } %>
+                                                </div>
+                                                <div class="form-group col-sm-3 mb-3">
+                                                    <label for="target">Country</label>
+                                                    <input value="<%=dataProduct.country%>" type="text"
+                                                        class="form-control" name="country">
+                                                    <% if (typeof fieldErrors !=='undefined' && fieldErrors.country) {
+                                                        %>
+                                                        <span class="text-danger">
+                                                            <%= fieldErrors.country %>
+                                                        </span>
+                                                        <% } %>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-sm-3 mb-3">
                                                     <label for="factory">Factory</label>
                                                     <select class="form-control" name="factory">
                                                         <% factories.forEach((factory,index)=> { %>

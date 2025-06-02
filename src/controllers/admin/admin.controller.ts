@@ -77,6 +77,10 @@ const adminCreateProductPage = async (req: Request, res: Response) => {
         quantity: '',
         description: '',
         target: '',
+        weight: '',
+        material: '',
+        dimension: '',
+        country: '',
         factoryID: '',
         categoryID: '',
     }
@@ -86,7 +90,10 @@ const adminCreateProductPage = async (req: Request, res: Response) => {
 }
 
 const adminCreateProduct = async (req: Request, res: Response) => {
-    const { name, price, quantity, description, target, factory, category } = req.body;
+    const {
+        name, price, quantity, description, target, weight,
+        material, dimension, country, factory, category
+    } = req.body;
     const factories = await fetchAllFactories();
     const categories = await fetchAllCategories();
     const validate = ProductValidator.safeParse(req.body);
@@ -97,7 +104,8 @@ const adminCreateProduct = async (req: Request, res: Response) => {
             fieldErrors[field] = issue.message;
         }
         const dataProduct = {
-            name, price, quantity, description, target, factoryID: factory, categoryID: category
+            name, price, quantity, description, target, weight,
+            material, dimension, country, factoryID: factory, categoryID: category
         }
         return res.render('admin/product/create', {
             factories,
@@ -107,7 +115,10 @@ const adminCreateProduct = async (req: Request, res: Response) => {
         });
     }
     const image = req?.file?.filename ?? "";
-    await handleCreateProduct(name, +price, +quantity, description, target, factory, category, image);
+    await handleCreateProduct(
+        name, +price, +quantity, description, target, +weight,
+        material, dimension, country, factory, category, image
+    );
     return res.redirect('/admin/product');
 }
 
@@ -121,7 +132,10 @@ const adminDetailProductPage = async (req: Request, res: Response) => {
 }
 
 const adminUpdateProduct = async (req: Request, res: Response) => {
-    const { id, name, price, quantity, description, target, factory, category, oldImage } = req.body;
+    const {
+        id, name, price, quantity, description, target, weight,
+        material, dimension, country, factory, category, oldImage
+    } = req.body;
     const factories = await fetchAllFactories();
     const categories = await fetchAllCategories();
     const validate = ProductValidator.safeParse(req.body);
@@ -133,7 +147,8 @@ const adminUpdateProduct = async (req: Request, res: Response) => {
             fieldErrors[field] = issue.message;
         }
         const product = {
-            id, name, price, quantity, description, target, factoryID: factory, categoryID: category, image
+            id, name, price, quantity, description, target, weight,
+            material, dimension, country, factoryID: factory, categoryID: category, image
         }
         return res.render('admin/product/detail', {
             factories,
@@ -142,7 +157,10 @@ const adminUpdateProduct = async (req: Request, res: Response) => {
             product
         });
     }
-    await handleUpdateProduct(id, name, +price, +quantity, description, target, factory, category, image);
+    await handleUpdateProduct(
+        id, name, +price, +quantity, description, target, +weight,
+        material, dimension, country, factory, category, image
+    );
     return res.redirect('/admin/product');
 }
 

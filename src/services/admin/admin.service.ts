@@ -9,7 +9,11 @@ const hashPassword = async (plainText: string) => {
 }
 
 const fetchAllUsers = async () => {
-    const users = await prisma.user.findMany();
+    const users = await prisma.user.findMany({
+        include: {
+            role: true
+        }
+    });
     return users;
 }
 
@@ -94,18 +98,15 @@ const handleUpdateUser = async (
 //CRUD Product
 const handleCreateProduct = async (
     name: string, price: number, quantity: number,
-    description: string, target: string, factory: string, category: string, imageUpload: string
+    description: string, target: string, weight: number,
+    material: string, dimension: string, country: string,
+    factory: string, category: string, imageUpload: string
 ) => {
     const createProduct = await prisma.product.create({
         data: {
-            name: name,
-            price: price,
-            quantity: quantity,
-            description: description,
-            target: target,
-            factoryID: +factory,
-            categoryID: +category,
-            ...(imageUpload && { image: imageUpload })
+            name, price, quantity, description, target, weight,
+            material, dimension, country, factoryID: +factory,
+            categoryID: +category, ...(imageUpload && { image: imageUpload })
         }
     })
     return createProduct;
@@ -122,21 +123,18 @@ const fetchDetailProduct = async (id: string) => {
 
 const handleUpdateProduct = async (
     id: string, name: string, price: number, quantity: number,
-    description: string, target: string, factory: string, category: string, imageUpload: string
+    description: string, target: string, weight: number,
+    material: string, dimension: string, country: string,
+    factory: string, category: string, imageUpload: string
 ) => {
     const updateProduct = await prisma.product.update({
         where: {
             id: +id,
         },
         data: {
-            name: name,
-            price: price,
-            quantity: quantity,
-            description: description,
-            target: target,
-            factoryID: +factory,
-            categoryID: +category,
-            ...(imageUpload && { image: imageUpload })
+            name, price, quantity, description, target, weight,
+            material, dimension, country, factoryID: +factory,
+            categoryID: +category, ...(imageUpload && { image: imageUpload })
         },
     })
     return updateProduct;

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { fetchAllCategories } from "services/admin/admin.service";
-import { fetchProductById, fetchProducts, fetchRandomProducts } from "services/client/home.service";
+import { fetchProductById, fetchProducts, fetchRandomProducts } from "services/client/client.service";
 
 const homePage = async (req: Request, res: Response) => {
     const products = await fetchProducts();

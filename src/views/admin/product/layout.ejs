@@ -65,6 +65,9 @@
                                                         <th>Description</th>
                                                         <th>Quantity</th>
                                                         <th>Price</th>
+                                                        <th>Target</th>
+                                                        <th>Material</th>
+                                                        <th>Country</th>
                                                         <th>Actions</th>
                                                     </tr>
                                                 </thead>
@@ -77,14 +80,24 @@
                                                             <td class="ellipsis-cell" title="<%=product.name%>">
                                                                 <%=product.name%>
                                                             </td>
+                                                            <td>
+                                                                <%=new Intl.NumberFormat("de-DE", { style: "currency" ,
+                                                                    currency: "VND" }).format( product.price ),%>
+                                                            </td>
+                                                            <td>
+                                                                <%=product.quantity%>
+                                                            </td>
                                                             <td class="ellipsis-cell" title="<%=product.description%>">
                                                                 <%=product.description%>
                                                             </td>
                                                             <td>
-                                                                <%=product.price%>
+                                                                <%=product.target%>
                                                             </td>
                                                             <td>
-                                                                <%=product.quantity%>
+                                                                <%=product.material%>
+                                                            </td>
+                                                            <td>
+                                                                <%=product.country%>
                                                             </td>
                                                             <td>
                                                                 <div style="display: flex; gap: 15px;">

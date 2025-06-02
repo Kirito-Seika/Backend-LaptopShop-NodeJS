@@ -11,6 +11,7 @@ import {
     productPage
 } from 'controllers/client/client.controller';
 import fileUploadMiddleware from 'src/middleware/upload.multer';
+import { loginPage, registerPage } from 'controllers/auth/auth.controller';
 
 const router = express.Router();
 
@@ -18,6 +19,10 @@ const webRouter = (app: Express) => {
     //home router
     router.get('/', homePage);
     router.get('/product/:id', productPage);
+
+    //login routerrouter
+    router.get('/login', loginPage);
+    router.get('/register', registerPage);
 
     //admin router
     router.get('/admin', dashboardPage);

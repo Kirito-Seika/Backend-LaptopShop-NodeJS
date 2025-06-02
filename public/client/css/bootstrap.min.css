@@ -8363,6 +8363,10 @@ fieldset:disabled .btn {
     color: #6a6a6a !important
 }
 
+.text-secondary-star {
+    color: #fdbc3d !important
+}
+
 .text-success {
     color: #198754 !important
 }
