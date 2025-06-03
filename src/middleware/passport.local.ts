@@ -21,5 +21,20 @@ const passportLocal = () => {
                 }
                 return callback(null, user);
             }));
+
+    passport.serializeUser(function (user: any, callback) {
+        process.nextTick(function () {
+            return callback(null, {
+                id: user.id,
+                email: user.email
+            });
+        });
+    });
+
+    passport.deserializeUser(function (user, callback) {
+        process.nextTick(function () {
+            return callback(null, user);
+        });
+    });
 }
 export default passportLocal;

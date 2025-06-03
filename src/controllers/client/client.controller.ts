@@ -4,6 +4,7 @@ import { fetchProductById, fetchProducts, fetchRandomProducts } from "services/c
 
 const homePage = async (req: Request, res: Response) => {
     const products = await fetchProducts();
+    const user = req.user;
     return res.render('client/home/layout', { products });
 }
 
