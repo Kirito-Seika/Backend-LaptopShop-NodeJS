@@ -8,6 +8,10 @@ const hashPassword = async (plainText: string) => {
     return await bcrypt.hash(plainText, saltRounds)
 }
 
+const comparePassword = async (plainText: string, hashPassword: string) => {
+    return await bcrypt.compare(plainText, hashPassword);
+}
+
 const checkEmail = async (email: string) => {
     const user = await prisma.user.findUnique({
         where: {
@@ -163,6 +167,6 @@ const handleDeleteProduct = async (id: string) => {
 }
 
 export {
-    hashPassword, fetchAllUsers, fetchAllRoles, handleCreateUser, handleDeleteUser, fetchDetailUser, handleUpdateUser,
-    fetchAllProducts, fetchAllFactories, fetchAllCategories, handleCreateProduct, fetchDetailProduct, handleDeleteProduct, handleUpdateProduct, checkEmail
+    hashPassword, comparePassword, checkEmail, fetchAllUsers, fetchAllRoles, handleCreateUser, handleDeleteUser, fetchDetailUser, handleUpdateUser,
+    fetchAllProducts, fetchAllFactories, fetchAllCategories, handleCreateProduct, fetchDetailProduct, handleDeleteProduct, handleUpdateProduct,
 }

@@ -53,10 +53,10 @@
             <h1 class="login__title">Đăng nhập</h1>
 
             <div class="login__area">
-                <form action="" class="login__form">
+                <form action="/login" method="post" class="login__form">
                     <div class="login__content grid">
                         <div class="login__box">
-                            <input type="email" id="email" required placeholder=" "
+                            <input name="email" type="email" id="email" required placeholder=" "
                                 class="login__input login__input__pass">
                             <label for="email" class="login__label">Email</label>
 
@@ -64,7 +64,7 @@
                         </div>
 
                         <div class="login__box">
-                            <input type="password" id="password" required placeholder=" "
+                            <input name="password" type="password" id="password" required placeholder=" "
                                 class="login__input login__input__pass">
                             <label for="password" class="login__label">Password</label>
 
