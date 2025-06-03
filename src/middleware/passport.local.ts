@@ -13,11 +13,11 @@ const passportLocal = () => {
                     where: { email: username }
                 })
                 if (!user) {
-                    return callback(null, false, { message: `Email ${username} không tồn tại` })
+                    return callback(null, false, { message: `Thông tin tài khoản không chính xác` })
                 }
                 const isMatch = await comparePassword(password, user.password);
                 if (!isMatch) {
-                    return callback(null, false, { message: `Password không hợp lệ` })
+                    return callback(null, false, { message: `Thông tin tài khoản không chính xác` })
                 }
                 return callback(null, user);
             }));

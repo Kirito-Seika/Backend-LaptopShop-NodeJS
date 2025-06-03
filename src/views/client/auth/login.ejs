@@ -53,28 +53,50 @@
             <h1 class="login__title">Đăng nhập</h1>
 
             <div class="login__area">
+
                 <form action="/login" method="post" class="login__form">
                     <div class="login__content grid">
                         <div class="login__box">
-                            <input name="email" type="email" id="email" required placeholder=" "
-                                class="login__input login__input__pass">
+                            <input name="email" type="email" id="email" placeholder=" "
+                                class="login__input login__pass login__input__pass">
                             <label for="email" class="login__label">Email</label>
-
                             <i class="ri-mail-fill login__icon"></i>
                         </div>
+                        <% if (errors?.email) { %>
+                            <div style="margin-left: 10px; color: #e74a3b;">
+                                <p>
+                                    <%= errors.email %>
+                                </p>
+                            </div>
+                            <% } %>
 
-                        <div class="login__box">
-                            <input name="password" type="password" id="password" required placeholder=" "
-                                class="login__input login__input__pass">
-                            <label for="password" class="login__label">Password</label>
+                                <div class="login__box">
+                                    <input name="password" type="password" id="password" placeholder=" "
+                                        class="login__input login__pass login__input__pass">
+                                    <label for="password" class="login__label">Password</label>
+                                    <i class="ri-eye-off-fill login__icon login__password" id="loginPassword"></i>
+                                </div>
+                                <% if (errors?.password) { %>
+                                    <div style="margin-left: 10px; color: #e74a3b;">
+                                        <p>
+                                            <%= errors.password %>
+                                        </p>
+                                    </div>
+                                    <% } %>
 
-                            <i class="ri-eye-off-fill login__icon login__password" id="loginPassword"></i>
-                        </div>
+                                        <% if (messages && messages.length) { %>
+                                            <div style="margin-left: 10px; color: #e74a3b;">
+                                                <% messages.forEach((msg)=> { %>
+                                                    <p>
+                                                        <%= msg %>
+                                                    </p>
+                                                    <% }) %>
+                                            </div>
+                                            <% } %>
+
+                                                <a href="#" class="login__forgot">Quên mật khẩu?</a>
+                                                <button type="submit" class="login__button">Đăng nhập</button>
                     </div>
-
-                    <a href="#" class="login__forgot">Quên mật khẩu?</a>
-
-                    <button type="submit" class="login__button">Đăng nhập</button>
                 </form>
 
                 <div class="login__social">

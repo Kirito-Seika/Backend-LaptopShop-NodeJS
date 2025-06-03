@@ -3,7 +3,18 @@ import { handleRegister } from 'services/auth/auth.service';
 import { registerValidator } from 'src/validation/register.validator';
 
 const loginPage = async (req: Request, res: Response) => {
-    return res.render('client/auth/login');
+    const session = req.session as any;
+    const errors = session?.formErrors || {};
+    const messages = session?.messages || [];
+
+    // xóa lỗi sau khi render
+    session.formErrors = null;
+    session.messages = null;
+
+    res.render('client/auth/login', {
+        errors,
+        messages,
+    });
 }
 
 const registerPage = async (req: Request, res: Response) => {

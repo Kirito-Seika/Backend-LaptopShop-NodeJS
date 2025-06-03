@@ -13,6 +13,7 @@ import {
 import fileUploadMiddleware from 'src/middleware/upload.multer';
 import { loginPage, registerPage, registerUser } from 'controllers/auth/auth.controller';
 import passport from 'passport';
+import { loginValidator } from 'src/validation/login.validator';
 
 const router = express.Router();
 
@@ -23,9 +24,10 @@ const webRouter = (app: Express) => {
 
     //login routerrouter
     router.get('/login', loginPage);
-    router.post('/login', passport.authenticate('local', {
+    router.post('/login', loginValidator, passport.authenticate('local', {
         successRedirect: '/',
-        failureRedirect: '/login'
+        failureRedirect: '/login',
+        failureMessage: true
     }));
     router.get('/register', registerPage);
     router.post('/register', fileUploadMiddleware('avatar'), registerUser);
